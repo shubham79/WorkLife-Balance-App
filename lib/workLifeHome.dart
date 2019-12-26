@@ -20,6 +20,8 @@ class _WorkLifeState extends State<WorkLife> {
   String _backgroundImage =
       'https://cdn.pixabay.com/photo/2019/12/07/14/55/labrador-4679457_960_720.png';
 
+  double opacity = 0.0;
+
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
@@ -77,24 +79,28 @@ class _WorkLifeState extends State<WorkLife> {
                     ],
                   ),
                 ),
-                RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(children: [
-                    TextSpan(
-                      text: "Hello ",
-                      style: TextStyle(
-                          fontSize: 40,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w300),
-                    ),
-                    TextSpan(
-                      text: "Shubham!",
-                      style: TextStyle(
-                          fontSize: 40,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold),
-                    )
-                  ]),
+                AnimatedOpacity(
+                  duration: Duration(seconds: 1),
+                  opacity: opacity,
+                  child: RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(children: [
+                      TextSpan(
+                        text: "Hello ",
+                        style: TextStyle(
+                            fontSize: 40,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w300),
+                      ),
+                      TextSpan(
+                        text: "Shubham!",
+                        style: TextStyle(
+                            fontSize: 40,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      )
+                    ]),
+                  ),
                 ),
                 Text(
                   'How is your work-life balance this week?',
@@ -411,7 +417,11 @@ class _WorkLifeState extends State<WorkLife> {
       //flotingActionButton
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.black,
-        onPressed: () {},
+        onPressed: () {
+          setState(() {
+            this.opacity = this.opacity == 0 ? 1 : 0;
+          });
+        },
         child: Icon(Icons.add, size: 40, color: Colors.white),
       ),
 
